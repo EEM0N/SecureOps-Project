@@ -13,7 +13,7 @@ variable "cloud_provider" {
   default = "aws"
 }
 
-variable "cidr" {
+variable "hcp_cidr" {
   type    = string
   default = "172.25.16.0/20"
 }
