@@ -1,13 +1,13 @@
 resource "hcp_hvn" "vault_hvn" {
-  hvn_id         = "cohort7"
-  cloud_provider = "aws"
+  hvn_id         = var.hvn_id
+  cloud_provider = var.cloud_provider
   region         = var.aws_region
-  cidr_block     = "172.25.16.0/20"
+  cidr_block     = var.cidr
 }
 
 resource "hcp_vault_cluster" "vault_cluster" {
-  cluster_id = "cohort7-vault-cluster"
+  cluster_id = var.cluster_id
   hvn_id     = hcp_hvn.vault_hvn.hvn_id
-  tier       = "starter_small"
+  tier       = var.tier
   public_endpoint = true
 }
