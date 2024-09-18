@@ -14,7 +14,7 @@ output "vault_namespace" {
 }
 
 output "vault_public_endpoint_url" {
-  description = "HCP Vault Cluster vault_public_endpoint_url"
+  description = "HCP Vault Cluster Vault Public Endpoint URL"
   value = hcp_vault_cluster.vault_cluster.vault_public_endpoint_url
 }
 
