@@ -27,3 +27,8 @@ variable "tier" {
   type    = string
   default = "starter_small"
 }
+
+variable "public_endpoint" {
+  type    = bool
+  default = true
+}
