@@ -1,6 +1,6 @@
 variable "hvn_id" {
   type    = string
-  default = "cohort7"
+  default = "secureops-project-network-for-vault-cluster"
 }
 
 variable "aws_region" {
@@ -20,7 +20,7 @@ variable "hcp_cidr" {
 
 variable "cluster_id" {
   type    = string
-  default = "cohort7-vault-cluster"
+  default = "secureops-project-vault-cluster-id"
 }
 
 variable "tier" {
