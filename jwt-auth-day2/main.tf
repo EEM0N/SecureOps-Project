@@ -61,14 +61,14 @@ EOT
 }
 
 
-resource "vault_jwt_auth_backend_role" "admin-role" {
+resource "vault_jwt_auth_backend_role" "admin_role" {
   backend = vault_jwt_auth_backend.example.path
-  role_name = "admin-role"
+  role_name = var.role_name
   token_policies = [vault_policy.example.name]
   bound_audiences = [var.bound_audiences]
   bound_claims_type = "glob"
   bound_claims = {
-    sub = "organization:hellocloud-eem:project:SecureOps-Project:workspace:*:run_phase:*"
+    sub = "organization:${var.organization}:project:${var.project}:workspace:*:run_phase:*"
   }
   user_claim = "terraform_full_workspace"
   role_type  = "jwt"
