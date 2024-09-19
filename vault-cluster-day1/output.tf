@@ -24,6 +24,6 @@ output "vault_version" {
 }
 
 output "vault_private_endpoint_url" {
-  description = "HCP Vault Cluster vault_public_endpoint_url"
+  description = "HCP Vault Cluster Vault Private Endpoint URL"
   value = hcp_vault_cluster.vault_cluster.vault_private_endpoint_url
 }
