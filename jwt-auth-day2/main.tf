@@ -65,7 +65,7 @@ resource "vault_jwt_auth_backend_role" "admin-role" {
   backend = vault_jwt_auth_backend.example.path
   role_name = var.role_name
   token_policies = [vault_policy.example.name]
-  bound_audiences = [var.bound_audiences]
+  bound_audiences = ["vault.workload.identity"]
   bound_claims_type = "glob"
   bound_claims = {
     sub = "organization:${var.organization}:project:${var.project}:workspace:*:run_phase:*"
