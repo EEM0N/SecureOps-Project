@@ -3,6 +3,6 @@ output "secret_name" {
   value       = vault_kv_secret_v2.example.name
 }
 output "secret_path" {
-  description = "Path to the secret"
+  description = "Path to the secret stored"
   value       = vault_kv_secret_v2.example.path
 }
