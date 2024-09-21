@@ -19,7 +19,7 @@ output "vault_public_endpoint_url" {
 }
 
 output "vault_version" {
-  description = "HCP Vault Cluster Vault Version"
+  description = "HCP Vault Cluster's Vault Version"
   value = hcp_vault_cluster.vault_cluster.vault_version
 }
 
