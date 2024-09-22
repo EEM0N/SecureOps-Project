@@ -96,3 +96,41 @@ resource "aws_route" "private_route" {
   destination_cidr_block    = "0.0.0.0/0"
   gateway_id = aws_nat_gateway.example.id
 }
+
+## DB 
+resource "aws_subnet" "db_subnet" {
+  count = length(var.db_cidr_block)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.db_cidr_block[count.index]
+  availability_zone = data.aws_availability_zones.azs.names[count.index]
+
+  tags = {
+    Name = "db subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
+  }
+}
+resource "aws_route_table" "db_subnet_rt" {
+  vpc_id = aws_vpc.main.id
+
+
+  tags = {
+    Name = "db_subnet_rt"
+  }
+}
+resource "aws_route_table_association" "db" {
+  count = length(var.db_cidr_block)
+  subnet_id      = aws_subnet.db_subnet[count.index].id
+  route_table_id = aws_route_table.db_subnet_rt.id
+}
+resource "aws_route" "db_route" {
+  route_table_id            = aws_route_table.db_subnet_rt.id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id = aws_nat_gateway.example.id
+}
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name       = "db-group"
+  subnet_ids = aws_subnet.db_subnet[*].id
+
+  tags = {
+    Name = "Vault Cluster DB subnet group"
+  }
+}
