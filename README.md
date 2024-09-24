@@ -65,6 +65,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   - Configured environment variables and secrets (e.g., AWS access keys) in Terraform Cloud.
   - Configured VPC, subnets, and routing for the cloud infrastructure.
 - **Outcome**: Cloud infrastructure setup is complete, managed through Terraform VCS workflow.
-
+![Day 3](figures/day3.png)
 ---
 
