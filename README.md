@@ -46,7 +46,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 - **Actions**: 
   - Initialized GitHub repository and created basic Terraform configuration files.
   - Integrated GitHub repository with Terraform Cloud for automatic plan and apply.
-  - Defined Terraform workspace structure (staging and production).
+  - Defined Terraform workspace structure for each day.
 - **Outcome**: GitHub repository and Terraform Cloud are connected, with basic CI/CD workflow in place.
 ![Day 1](figures/day1.png)
 ---
@@ -60,7 +60,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ---
 
 ### Day 3 & 4: Cloud Infrastructure Setup with Terraform
-- **Task**: Complete the cloud infrastructure setup and improve the CI/CD pipeline by managing sensitive variables and configurations.
+- **Task**: Configure the cloud infrastructure setup and improve the CI/CD pipeline by managing sensitive variables and configurations.
 - **Actions**:
   - Configured environment variables and secrets (e.g., AWS access keys) in Terraform Cloud.
   - Configured VPC, subnets, and routing for the cloud infrastructure.
