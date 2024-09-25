@@ -1,3 +1,4 @@
+# Configure the JWT authentication backend in Vault
 resource "vault_jwt_auth_backend" "example" {
     description         = "Demonstration of the Terraform JWT auth backend"
     path                = "jwt"
@@ -5,6 +6,7 @@ resource "vault_jwt_auth_backend" "example" {
     bound_issuer        = "https://app.terraform.io"
 }
 
+# Define a policy for admin access in Vault
 resource "vault_policy" "example" {
   name = "admin-policy"
 
@@ -60,7 +62,7 @@ path "example/*" {
 EOT
 }
 
-
+# Define a role for the JWT authentication backend
 resource "vault_jwt_auth_backend_role" "admin_role" {
   backend = vault_jwt_auth_backend.example.path
   role_name = var.role_name

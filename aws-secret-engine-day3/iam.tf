@@ -1,3 +1,4 @@
+# Create an IAM user for the Vault admin
 resource "aws_iam_user" "vault_admin" {
   name = var.vault_admin
   path = "/"
@@ -7,10 +8,12 @@ resource "aws_iam_user" "vault_admin" {
   }
 }
 
+# Create an access key for the Vault admin user
 resource "aws_iam_access_key" "vault_admin" {
   user = aws_iam_user.vault_admin.name
 }
 
+# Define the IAM policy document for the Vault admin user
 data "aws_iam_policy_document" "vault_admin" {
   statement {
     effect    = "Allow"
@@ -30,13 +33,14 @@ data "aws_iam_policy_document" "vault_admin" {
         "iam:PutUserPolicy",
         "iam:AddUserToGroup",
         "iam:RemoveUserFromGroup"
-        ]
+    ]
     resources = [
-    "arn:aws:iam::135808914800:user/vault-*"
-        ]
+      "arn:aws:iam::135808914800:user/vault-*"
+    ]
   }
 }
 
+# Attach the defined policy to the Vault admin user
 resource "aws_iam_user_policy" "vault_admin" {
   name   = "vault-admin-policy"
   user   = aws_iam_user.vault_admin.name

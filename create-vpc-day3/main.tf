@@ -1,136 +1,156 @@
+# AWS Provider Configuration
 # provider "aws" {
 #   access_key = data.vault_aws_access_credentials.creds.access_key
 #   secret_key = data.vault_aws_access_credentials.creds.secret_key
 # }
 
-
-resource "aws_vpc" "main" {
+# Create a VPC for the application
+resource "aws_vpc" "app_vpc" {
   cidr_block = "10.10.0.0/16"
   tags = {
-    Name = "vault-vpc"
+    Name = var.vpc_name
   }
 }
-resource "aws_subnet" "public" {
+
+# Create public subnets for application resources
+resource "aws_subnet" "public_subnet" {
   count = length(var.public_cidr_block)
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.app_vpc.id
   cidr_block = var.public_cidr_block[count.index]
   availability_zone = data.aws_availability_zones.azs.names[count.index]
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
+    Name = "public-subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
   }
 }
-resource "aws_route_table" "public_subnet_rt" {
-  vpc_id = aws_vpc.main.id
 
+# Create a route table for public subnets
+resource "aws_route_table" "public_route_table" {
+  vpc_id = aws_vpc.app_vpc.id
 
   tags = {
-    Name = "public_subnet_rt"
+    Name = "public-route-table"
   }
 }
-resource "aws_route_table_association" "public" {
+
+# Associate public subnets with the public route table
+resource "aws_route_table_association" "public_subnet_association" {
   count = length(var.public_cidr_block)
-  subnet_id      = aws_subnet.public[count.index].id
-  route_table_id = aws_route_table.public_subnet_rt.id
+  subnet_id      = aws_subnet.public_subnet[count.index].id
+  route_table_id = aws_route_table.public_route_table.id
 }
-resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.main.id
+
+# Create an Internet Gateway for the VPC
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.app_vpc.id
 
   tags = {
-    Name = "vault-vpc GW"
+    Name = "app-internet-gateway"
   }
 }
 
-resource "aws_route" "r" {
-  route_table_id            = aws_route_table.public_subnet_rt.id
+# Create a route for the public route table to allow outbound traffic
+resource "aws_route" "public_route" {
+  route_table_id            = aws_route_table.public_route_table.id
   destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.gw.id
+  gateway_id = aws_internet_gateway.internet_gateway.id
 }
 
-
-#  private 
-resource "aws_subnet" "private" {
+# Create private subnets for application resources
+resource "aws_subnet" "private_subnet" {
   count = length(var.private_cidr_block)
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.app_vpc.id
   cidr_block = var.private_cidr_block[count.index]
   availability_zone = data.aws_availability_zones.azs.names[count.index]
 
   tags = {
-    Name = "private subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
+    Name = "private-subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
   }
 }
-resource "aws_route_table" "private_subnet_rt" {
-  vpc_id = aws_vpc.main.id
 
+# Create a route table for private subnets
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.app_vpc.id
 
   tags = {
-    Name = "private_subnet_rt"
+    Name = "private-route-table"
   }
 }
-resource "aws_route_table_association" "private" {
+
+# Associate private subnets with the private route table
+resource "aws_route_table_association" "private_subnet_association" {
   count = length(var.private_cidr_block)
-  subnet_id      = aws_subnet.private[count.index].id
-  route_table_id = aws_route_table.private_subnet_rt.id
+  subnet_id      = aws_subnet.private_subnet[count.index].id
+  route_table_id = aws_route_table.private_route_table.id
 }
 
-resource "aws_eip" "lb" {
+# Allocate an Elastic IP for the NAT Gateway
+resource "aws_eip" "nat_eip" {
   domain   = "vpc"
 }
 
-resource "aws_nat_gateway" "example" {
-  allocation_id = aws_eip.lb.id
-  subnet_id     = aws_subnet.public[0].id
+# Create a NAT Gateway in the first public subnet
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.nat_eip.id
+  subnet_id     = aws_subnet.public_subnet[0].id
 
   tags = {
-    Name = "vault-vpc NGW"
+    Name = "app-nat-gateway"
   }
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.gw]
+  # Ensure proper ordering by depending on the Internet Gateway
+  depends_on = [aws_internet_gateway.internet_gateway]
 }
 
+# Create a route for private subnets to allow outbound traffic through the NAT Gateway
 resource "aws_route" "private_route" {
-  route_table_id            = aws_route_table.private_subnet_rt.id
+  route_table_id            = aws_route_table.private_route_table.id
   destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_nat_gateway.example.id
+  gateway_id = aws_nat_gateway.nat_gateway.id
 }
 
-## DB 
+# Create database subnets for application resources
 resource "aws_subnet" "db_subnet" {
   count = length(var.db_cidr_block)
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.app_vpc.id
   cidr_block = var.db_cidr_block[count.index]
   availability_zone = data.aws_availability_zones.azs.names[count.index]
 
   tags = {
-    Name = "db subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
+    Name = "db-subnet-${element(data.aws_availability_zones.azs.names, count.index)}"
   }
 }
-resource "aws_route_table" "db_subnet_rt" {
-  vpc_id = aws_vpc.main.id
 
+# Create a route table for database subnets
+resource "aws_route_table" "db_route_table" {
+  vpc_id = aws_vpc.app_vpc.id
 
   tags = {
-    Name = "db_subnet_rt"
+    Name = "db-route-table"
   }
 }
-resource "aws_route_table_association" "db" {
+
+# Associate database subnets with the database route table
+resource "aws_route_table_association" "db_subnet_association" {
   count = length(var.db_cidr_block)
   subnet_id      = aws_subnet.db_subnet[count.index].id
-  route_table_id = aws_route_table.db_subnet_rt.id
+  route_table_id = aws_route_table.db_route_table.id
 }
+
+# Create a route for the database subnets to allow outbound traffic through the NAT Gateway
 resource "aws_route" "db_route" {
-  route_table_id            = aws_route_table.db_subnet_rt.id
+  route_table_id            = aws_route_table.db_route_table.id
   destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_nat_gateway.example.id
+  gateway_id = aws_nat_gateway.nat_gateway.id
 }
+
+# Create a DB subnet group for RDS
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "db-group"
+  name       = "db-subnet-group"
   subnet_ids = aws_subnet.db_subnet[*].id
 
   tags = {
-    Name = "Vault Cluster DB subnet group"
+    Name = "Database Subnet Group"
   }
 }
