@@ -67,7 +67,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 - **Outcome**: Cloud infrastructure setup is complete, managed through Terraform VCS workflow.
 ![Day 3](figures/day3-and-day4.png)
 
-When using dynamic AWS credentials in Terraform to configure resources, the credentials are generated for each plan and apply step. However, since these credentials have a short time-to-live (TTL), they may expire after the plan phase is complete, leading to errors during the apply phase if the credentials are no longer valid. 
+  - When using dynamic AWS credentials in Terraform to configure resources, the credentials are generated for each plan and apply step. However, since these credentials have a short time-to-live (TTL), they may expire after the plan phase is complete, leading to errors during the apply phase if the credentials are no longer valid. 
 ![Day 3 Error](figures/error-day3.PNG)
 ---
 
