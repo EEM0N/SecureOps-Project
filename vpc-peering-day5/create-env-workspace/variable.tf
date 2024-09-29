@@ -33,8 +33,8 @@ variable "tfc_vault_backed_aws_auth" {
   type = string
   default = "true"
 }
-variable "tfc_vault_backed_aws_type" {
-  description = "TFC_VAULT_BACKED_AWS_TYPE"
+variable "tfc_vault_backed_aws_auth_type" {
+  description = "TFC_VAULT_BACKED_AWS_AUTH_TYPE "
   type = string
   default = "iam_user"
 }

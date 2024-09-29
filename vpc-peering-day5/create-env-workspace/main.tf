@@ -52,10 +52,10 @@ resource "tfe_variable" "tfc_vault_backed_aws_auth" {
   
 }
 
-resource "tfe_variable" "tfc_vault_backed_aws_type" {
+resource "tfe_variable" "tfc_vault_backed_aws_auth_type" {
   workspace_id = data.tfe_workspace.my_workspace.id
-  key      = "TFC_VAULT_BACKED_AWS_TYPE"
-  value    = var.tfc_vault_backed_aws_type
+  key      = "TFC_VAULT_BACKED_AWS_AUTH_TYPE"
+  value    = var.tfc_vault_backed_aws_auth_type
   category = "env"
   
 }
