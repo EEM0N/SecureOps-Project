@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "hellocloud-eem"
     workspaces = {
-      name = "vpc-peering-day5"
+      name = "create-vpc-day3"
     }
   }
 }
