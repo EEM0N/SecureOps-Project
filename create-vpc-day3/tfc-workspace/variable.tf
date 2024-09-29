@@ -11,7 +11,7 @@ variable "org_name" {
 variable "vault_url" {
   description = "The address of the Vault instance runs will access."
   type = string
-  default = "https://vault-cluster-id-public-vault-75860156.3e0b49c9.z1.hashicorp.cloud:8200" ### have to change new vault cluster id
+  default = "https://vault-cluster-id-public-vault-389205e7.789030d1.z1.hashicorp.cloud:8200" ### have to change new vault cluster id
 }
 variable "run_role" {
   description = "TFC_VAULT_RUN_ROLE"
