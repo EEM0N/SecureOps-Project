@@ -151,10 +151,24 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
      vault policy read db-policy
      ```
 
-  8. **Create an AWS Role with IAM Authentication**  
+  8. **Create an AWS Role with IAM Authentication and Add Missing Policy**  
      Define an AWS role in Vault (`db-role`), specifying the authentication type, the IAM principal ARN, and the associated policy (`db-policy`).  
+     
+     Additionally, since the policy for managing Vault system policies was not added in **jwt-auth-method-day2/main.tf**, this step includes that policy:
+     
      ```bash
      vault write /auth/aws/role/db-role auth_type=iam bound_iam_principal_arn=YOUR_IAM_PRINCIPAL_ARN policies=db-policy
+     ```
+
+     Include the following policy to manage Vault policies:
+
+     ```hcl
+     path "sys/policies/*" {
+       capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+     }
+     path "sys/policies/" {
+       capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+     }
      ```
 
   To automate the setup of the AWS auth method in Vault, please refer to the [enable-aws-auth-on-vault-day6](https://github.com/EEM0N/SecureOps-Project/tree/main/enable-aws-auth-on-vault-day6) for the complete Terraform implementation.
