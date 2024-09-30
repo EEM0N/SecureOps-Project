@@ -133,5 +133,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
      ```bash
      vault write /auth/aws/role/db-role auth_type=iam bound_iam_principal_arn=YOUR_IAM_PRINCIPAL_ARN policies=db-policy
      ```
-  "To automate the setup of the AWS auth method in Vault, please refer to the enable-aws-auth-on-vault-day6 folder in GitHub for the complete Terraform implementation."
+  To automate the setup of the AWS auth method in Vault, please refer to the [enable-aws-auth-on-vault-day6](https://github.com/EEM0N/SecureOps-Project/tree/main/enable-aws-auth-on-vault-day6)
+ for the complete Terraform implementation.
 ---
