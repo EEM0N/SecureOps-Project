@@ -1,7 +1,7 @@
 variable "workspace_name" {
   description = "Workspace Name"
   type = string
-  default = "vpc-peering-day5"
+  default = "enable-aws-auth-on-vault-day6"
 }
 variable "org_name" {
   description = "Organization Name"
