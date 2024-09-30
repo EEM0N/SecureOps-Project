@@ -81,7 +81,57 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 5](figures/day5.png)
 ---
 
-### Day 6: Set up AWS auth method with Terraform
-- **Task**: Set up AWS auth method 
-  - Refer https://developer.hashicorp.com/vault/tutorials/manage-hcp-vault-dedicated/vault-auth-method-aws
+### Day 6: AWS Auth Method Configuration in Vault
+
+- **Task**: Set up AWS auth method  
+  - Refer: [AWS Auth Method in Vault Documentation](https://developer.hashicorp.com/vault/tutorials/manage-hcp-vault-dedicated/vault-auth-method-aws)
+
+  1. **Configure AWS Client Credentials**  
+     Set up AWS access and secret keys in Vault to authenticate against AWS.  
+     ```bash
+     vault write /auth/aws/config/client access_key=$AWS_ACCESS_KEY_ID secret_key=$AWS_SECRET_ACCESS_KEY
+     ```
+
+  2. **Read AWS Configuration**  
+     Verify the AWS client configuration.  
+     ```bash
+     vault read /auth/aws/config/
+     ```
+
+  3. **Rotate AWS Root Credentials**  
+     Rotate the AWS root credentials. Note that this command may not work depending on the permissions or limitations of our setup.  
+     ```bash
+     vault write -f /auth/aws/config/rotate-root
+     ```
+
+  4. **List Vault Policies**  
+     View all policies defined in Vault.  
+     ```bash
+     vault policy list
+     ```
+
+  5. **List Vault Secret Engines**  
+     View all secret engines enabled in Vault (such as AWS, database, or SSH).  
+     ```bash
+     vault secrets list
+     ```
+
+  6. **Create a Vault Policy**  
+     Create a new policy (in this example, `db-policy`) using an HCL file that defines access rules.  
+     ```bash
+     vault policy write db-policy hcl-file-name
+     ```
+
+  7. **Read a Vault Policy**  
+     Read and display the contents of a specific policy (in this example, `db-policy`).  
+     ```bash
+     vault policy read db-policy
+     ```
+
+  8. **Create an AWS Role with IAM Authentication**  
+     Define an AWS role in Vault (`db-role`), specifying the authentication type, the IAM principal ARN, and the associated policy (`db-policy`).  
+     ```bash
+     vault write /auth/aws/role/db-role auth_type=iam bound_iam_principal_arn=YOUR_IAM_PRINCIPAL_ARN policies=db-policy
+     ```
+  "To automate the setup of the AWS auth method in Vault, please refer to the enable-aws-auth-on-vault-day6 folder in GitHub for the complete Terraform implementation."
 ---
