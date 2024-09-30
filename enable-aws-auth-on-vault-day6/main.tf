@@ -2,6 +2,7 @@ resource "vault_auth_backend" "aws" {
   type = "aws"
 }
 
+#Configures the client used by an AWS Auth Backend in Vault
 resource "vault_aws_auth_backend_client" "aws" {
   backend    = vault_auth_backend.aws.path
   access_key = aws_iam_access_key.aws_auth_admin_key.id
