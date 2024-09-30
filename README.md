@@ -80,3 +80,8 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 - **Outcome**: Cloud infrastructure setup is complete, managed through Terraform VCS workflow.
 ![Day 5](figures/day5.png)
 ---
+
+### Day 6: Set up AWS auth method with Terraform
+- **Task**: Set up AWS auth method 
+  - Refer https://developer.hashicorp.com/vault/tutorials/manage-hcp-vault-dedicated/vault-auth-method-aws
+---
