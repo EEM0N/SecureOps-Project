@@ -110,10 +110,33 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
      vault policy list
      ```
 
-  5. **List Vault Secret Engines**  
-     View all secret engines enabled in Vault (such as AWS, database, or SSH).  
-     ```bash
-     vault secrets list
+  5. **Add Token and Database Permissions**  
+     Add the necessary policies to allow token operations and database access.
+
+     ```hcl
+     path "auth/token/lookup-self" {
+       capabilities = ["read"]
+     }
+     # Allow tokens to renew themselves
+     path "auth/token/renew-self" {
+       capabilities = ["update"]
+     }
+     # Allow tokens to revoke themselves
+     path "auth/token/revoke-self" {
+       capabilities = ["update"]
+     }
+     path "db/" {
+       capabilities = ["read","list"]
+     }
+     path "db/*" {
+       capabilities = ["read","list"]
+     }
+     path "aws-dev/" {
+       capabilities = ["read","list"]
+     }
+     path "aws-dev/*" {
+       capabilities = ["read","list"]
+     }
      ```
 
   6. **Create a Vault Policy**  
@@ -133,6 +156,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
      ```bash
      vault write /auth/aws/role/db-role auth_type=iam bound_iam_principal_arn=YOUR_IAM_PRINCIPAL_ARN policies=db-policy
      ```
-  To automate the setup of the AWS auth method in Vault, please refer to the [enable-aws-auth-on-vault-day6](https://github.com/EEM0N/SecureOps-Project/tree/main/enable-aws-auth-on-vault-day6)
- for the complete Terraform implementation.
+
+  To automate the setup of the AWS auth method in Vault, please refer to the [enable-aws-auth-on-vault-day6](https://github.com/EEM0N/SecureOps-Project/tree/main/enable-aws-auth-on-vault-day6) for the complete Terraform implementation.
+
 ---
