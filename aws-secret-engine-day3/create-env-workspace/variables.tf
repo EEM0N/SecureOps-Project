@@ -1,7 +1,7 @@
 variable "workspace_name" {
   description = "Workspace Name"
   type = string
-  default = "create-vpc-day3"
+  default = "aws-secret-engine-day3"
 }
 variable "org_name" {
   description = "Organization Name"
@@ -22,4 +22,9 @@ variable "vault_namespace" {
   description = "TFC_VAULT_NAMESPACE"
   type = string
   default = "admin"
+}
+variable "aws_region" {
+  description = "AWS_REGION"
+  type = string
+  default = "ap-southeast-1"
 }

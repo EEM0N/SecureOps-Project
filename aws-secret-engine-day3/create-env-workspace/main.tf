@@ -43,35 +43,3 @@ resource "tfe_variable" "aws_region" {
   category = "env"
   
 }
-
-resource "tfe_variable" "tfc_vault_backed_aws_auth" {
-  workspace_id = data.tfe_workspace.my_workspace.id
-  key      = "TFC_VAULT_BACKED_AWS_AUTH"
-  value    = var.tfc_vault_backed_aws_auth
-  category = "env"
-  
-}
-
-resource "tfe_variable" "tfc_vault_backed_aws_auth_type" {
-  workspace_id = data.tfe_workspace.my_workspace.id
-  key      = "TFC_VAULT_BACKED_AWS_AUTH_TYPE"
-  value    = var.tfc_vault_backed_aws_auth_type
-  category = "env"
-  
-}
-
-resource "tfe_variable" "tfc_vault_backed_aws_run_vault_role" {
-  workspace_id = data.tfe_workspace.my_workspace.id
-  key      = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE"
-  value    = var.tfc_vault_backed_aws_run_vault_role
-  category = "env"
-  
-}
-
-resource "tfe_variable" "tfc_vault_backed_aws_mount_path" {
-  workspace_id = data.tfe_workspace.my_workspace.id
-  key      = "TFC_VAULT_BACKED_AWS_MOUNT_PATH"
-  value    = var.tfc_vault_backed_aws_mount_path
-  category = "env"
-  
-}
