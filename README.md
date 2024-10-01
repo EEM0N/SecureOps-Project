@@ -173,7 +173,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 
   To automate the setup of the AWS auth method in Vault, please refer to the [enable-aws-auth-on-vault-day6](https://github.com/EEM0N/SecureOps-Project/tree/main/enable-aws-auth-on-vault-day6) for the complete Terraform implementation.
 
-  steps to install HashiCorp Vault and test its AWS authentication method
+  Steps to install HashiCorp Vault and test its AWS authentication method
   ```bash
     sudo apt -y update && sudo apt -y install gpg wget
     wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
