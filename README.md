@@ -187,5 +187,5 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   ```bash
   vault login -method=aws role=<role-name>
   ```
-
+![Day 6](figures/day6.png)
 ---
