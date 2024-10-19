@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "vault_admin" {
         "iam:RemoveUserFromGroup"
     ]
     resources = [
-      "arn:aws:iam::xxxxxxxxxxxxxx:user/vault-*"
+      "arn:aws:iam::135808914800:user/vault-*"
     ]
   }
 }
