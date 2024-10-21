@@ -243,6 +243,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     vault login -method=approle role_id="$ROLE_ID" secret_id="$SECRET_ID"
 
     After logging in, we can verify our login by checking our current Vault token:
+    vault token lookup
   ```
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
 ---
