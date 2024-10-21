@@ -203,8 +203,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   The application directly accesses the locally cached AWS credentials from the Vault Agent, avoiding the need to handle any Vault authentication details itself.
 ![Day 7](figures/day7-8-withoutagent.png)
 ![Day 8](figures/day7-8-withagent.png)
-  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
-
   ```bash
     # Enable AppRole Authentication
     vault auth enable approle
@@ -238,4 +236,5 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     # Start the Vault Agent
     vault agent -config=/home/vagrant/vault-agent.hcl -log-level=debug 
   ```
+  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
 ---
