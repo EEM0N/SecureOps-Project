@@ -190,7 +190,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 6](figures/day6.png)
 ---
 
-### Day 7 and 8: Setup VPC Peering with Terraform
+### Day 7 and 8: Secret Management using Vault Agent
 - Without Vault Agent:
     In the first diagram (without Vault Agent), here's the flow:
 
