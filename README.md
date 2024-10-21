@@ -192,15 +192,11 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 
 ### Day 7 and 8: Secret Management using Vault Agent
 - Without Vault Agent:
-    In the first diagram (without Vault Agent), here's the flow:
-
     Application needs the role ID and secret ID to authenticate with Vault.
     Vault uses AppRole to verify those IDs and generate a token.
     The token is used to access the AWS Secret Engine to request AWS credentials (like the access key and secret key).
     The application then uses these AWS credentials to access AWS resources.
 - With Vault Agent:
-  In the second diagram (with Vault Agent), here's the updated flow:
-
   Vault Agent now acts as a middleware that handles the authentication on behalf of the application.
   Vault Agent delivers the role ID and secret ID to Vault and retrieves the token.
   Vault Agent fetches the AWS credentials (using the token) from the AWS Secret Engine and caches them locally for the application to use.
