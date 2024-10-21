@@ -210,7 +210,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     # Create the policy file
     cat <<EOF > policy.hcl
     # policy.hcl
-    path "aws-dev/creds/*" {
+    path "aws-dev/*" {
       capabilities = ["read"]
     }
     EOF
