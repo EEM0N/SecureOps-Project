@@ -205,7 +205,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 8](figures/day7-8-withagent.png)
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
 
-- Complete Setup Steps
   ```bash
     # Enable AppRole Authentication
     vault auth enable approle
