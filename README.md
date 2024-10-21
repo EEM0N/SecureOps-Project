@@ -236,9 +236,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     # Read the policy to verify
     vault policy read aws-approle
 
-    # Read the policy to verify
-    vault policy read aws-approle
-
     # Start the Vault Agent
     vault agent -config=/home/vagrant/vault-agent.hcl -log-level=debug 
   ```
