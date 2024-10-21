@@ -235,6 +235,12 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 
     # Start the Vault Agent
     vault agent -config=/home/vagrant/vault-agent.hcl -log-level=debug 
+
+    # Log in to Vault
+    ROLE_ID="your-role-id"
+    SECRET_ID="your-secret-id"
+
+    vault login -method=approle role_id="$ROLE_ID" secret_id="$SECRET_ID"
   ```
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
 ---
