@@ -192,7 +192,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 
 ### Day 7 and 8: Setup VPC Peering with Terraform
 - 1. Without Vault Agent:
-  - 
     In the first diagram (without Vault Agent), here's the flow:
 
     Application needs the role ID and secret ID to authenticate with Vault.
@@ -200,7 +199,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     The token is used to access the AWS Secret Engine to request AWS credentials (like the access key and secret key).
     The application then uses these AWS credentials to access AWS resources.
 - 2. With Vault Agent:
-  - 
   In the second diagram (with Vault Agent), here's the updated flow:
 
   Vault Agent now acts as a middleware that handles the authentication on behalf of the application.
