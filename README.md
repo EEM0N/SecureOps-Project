@@ -204,4 +204,42 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 7](figures/day7-8-withoutagent.png)
 ![Day 8](figures/day7-8-withagent.png)
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+
+- Complete Setup Steps
+  ```bash
+    # Enable AppRole Authentication
+    vault auth enable approle
+
+    # Create the policy file
+    cat <<EOF > policy.hcl
+    # policy.hcl
+    path "aws-dev/creds/*" {
+      capabilities = ["read"]
+    }
+    EOF
+
+    # Write the policy to Vault
+    vault policy write aws-approle policy.hcl
+
+    # Create an AppRole with specified token TTL and policies
+    vault write /auth/approle/role/aws-approle \
+        token_ttl=5m \
+        token_max_ttl=15m \
+        token_policies=aws-approle
+
+    # Retrieve Role ID
+    vault read /auth/approle/role/aws-approle/role-id
+
+    # Generate Secret ID
+    vault write -f /auth/approle/role/aws-approle/secret-id
+
+    # Read the policy to verify
+    vault policy read aws-approle
+
+    # Read the policy to verify
+    vault policy read aws-approle
+
+    # Start the Vault Agent
+    vault agent -config=/home/vagrant/vault-agent.hcl -log-level=debug 
+  ```
 ---
