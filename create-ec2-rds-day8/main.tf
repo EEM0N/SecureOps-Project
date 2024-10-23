@@ -1,7 +1,6 @@
 //---------------------------------------------------------
 //-Jump Server 
 //---------------------------------------------------------
-
 resource "aws_security_group" "allow_ssh_jump" {
   name        = "allow_ssh_jump"
   description = "Allow SSH inbound traffic and all outbound traffic"
@@ -95,7 +94,7 @@ resource "aws_instance" "app_aws" {
   subnet_id  = data.aws_subnets.private.ids[0]
   vpc_security_group_ids = [aws_security_group.allow_ssh_app.id]
   iam_instance_profile = data.terraform_remote_state.iam.outputs.instance_profile_id
-  user_data = template_file.vault_agent_aws.rendered
+  user_data = data.template_file.vault_agent_aws.rendered
   tags = {
     Name = "App1"
   }
@@ -125,7 +124,7 @@ resource "aws_instance" "app_approle" {
   key_name = "ssh-key-${random_pet.env.id}"
   subnet_id  = data.aws_subnets.private.ids[1]
   vpc_security_group_ids = [aws_security_group.allow_ssh_app.id]
-  user_data = template_file.vault_agent_approle.rendered
+  user_data = data.template_file.vault_agent_approle.rendered
   tags = {
     Name = "Approle"
   }
