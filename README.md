@@ -254,10 +254,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   #### Key Components
   1. **AWS Auth Method (EC2 IAM Role)**:
       - The EC2 instance in **Private Subnet 1a** communicates with Vault using the **AWS Auth Method**.
-      - Vault authenticates the EC2 instance by verifying its **IAM Role** and **instance metadata**.
-      - Once authenticated, the instance can request dynamic secrets from Vault, such as short-lived AWS credentials or other sensitive information.
 
   2. **AppRole Auth Method**:
       - The EC2 instance in **Private Subnet 1b** uses the **AppRole Auth Method**.
-      - The application provides its **Role ID** and **Secret ID** to Vault, allowing Vault to authenticate the application and provide access to required secrets.
 --- 
