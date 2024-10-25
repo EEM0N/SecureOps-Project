@@ -247,11 +247,52 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   ```
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and for the complete Terraform implementation.
 ---
-### Day 8: Secret Management using Vault Agent
-- AWS Auth (EC2 IAM Role):
-- - The "APP with AWS Auth EC2" in the private subnet 1a communicates with Vault using the AWS Auth method. In this method, Vault authenticates EC2 instances by verifying the    IAM role associated with the instance. This is done by sending a signed AWS request from the EC2 instance to Vault, which in turn validates the identity based on the EC2's metadata and IAM role. Once authenticated, Vault can issue dynamic secrets (such as AWS credentials) or provide access to other services securely.
-- AppRole Auth:
-- - The "APP with AppRole Auth EC2" in the private subnet 1b communicates with Vault using the AppRole authentication method. This method is more application-centric, where the EC2 instance assumes a specific role within Vault. The application running on this EC2 instance provides its role ID and secret ID to Vault, and in return, Vault grants it access to the necessary secrets and resources.
-![Day 8](figures/day8.png)
-To automate the setup of the Approle auth method in Vault, please refer to the [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+# Day 8: Secret Management using Vault Agent
+
+## Overview
+
+This project demonstrates how to manage secrets securely for EC2 instances in AWS using **HashiCorp Vault**. It implements two authentication methods:
+1. **AWS Auth Method (EC2 IAM Role)** – for an EC2 instance in private subnet 1a.
+2. **AppRole Auth Method** – for an EC2 instance in private subnet 1b.
+
+Both methods enable EC2 instances to securely retrieve dynamic secrets (e.g., AWS credentials) from Vault.
+
+## Architecture
+
+![Day 8 Architecture](figures/day8.png)
+
+### Key Components
+
+1. **AWS Auth Method (EC2 IAM Role)**:
+    - The EC2 instance in **Private Subnet 1a** communicates with Vault using the **AWS Auth Method**.
+    - Vault authenticates the EC2 instance by verifying its **IAM Role** and **instance metadata**.
+    - Once authenticated, the instance can request dynamic secrets from Vault, such as short-lived AWS credentials or other sensitive information.
+
+2. **AppRole Auth Method**:
+    - The EC2 instance in **Private Subnet 1b** uses the **AppRole Auth Method**.
+    - The application provides its **Role ID** and **Secret ID** to Vault, allowing Vault to authenticate the application and provide access to required secrets.
+
+## Prerequisites
+
+- **Terraform** (v0.12+ recommended)
+- **AWS Account** with sufficient permissions for creating EC2 instances, IAM roles, and security groups.
+- **Vault Server** (self-hosted or Vault Cloud)
+
+## Infrastructure Details
+
+This Terraform project will create:
+1. **VPC** with public and private subnets.
+2. **EC2 Instances** in private subnets, each using different Vault authentication methods.
+3. **Security Groups** to allow necessary traffic between Vault and EC2 instances.
+4. **IAM Roles** for EC2 instances to enable AWS Auth with Vault.
+5. **Vault Policies** to control access to secrets.
+
+### AWS Resources Created
+
+- **VPC** with subnets:
+  - Private Subnet 1a for AWS Auth-based EC2 instance.
+  - Private Subnet 1b for AppRole Auth-based EC2 instance.
+- **EC2 Instances**:
+  - EC2 instance in Subnet 1a using AWS IAM role authentication.
+  - EC2 instance in Subnet 1b using AppRole authentication.
 --- 
