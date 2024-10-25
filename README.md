@@ -248,12 +248,8 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and for the complete Terraform implementation.
 ---
 ### Day 8: Secret Management using Vault Agent
-  #### Overview
-  This project demonstrates how to manage secrets securely for EC2 instances in AWS using **HashiCorp Vault**. It implements two authentication methods:
   1. **AWS Auth Method (EC2 IAM Role)** – for an EC2 instance in private subnet 1a.
   2. **AppRole Auth Method** – for an EC2 instance in private subnet 1b.
-  Both methods enable EC2 instances to securely retrieve dynamic secrets (e.g., AWS credentials) from Vault.
-  #### Architecture
   ![Day 8 Architecture](figures/day8.png)
   #### Key Components
   1. **AWS Auth Method (EC2 IAM Role)**:
