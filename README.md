@@ -260,6 +260,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 
 3. Additionally, both EC2 instances are in private subnets, and their communication to Vault might require a **Jump EC2** (located in public subnet 1a) to access the Vault securely.
 
-Please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+Please refer to the [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
 
 --- 
