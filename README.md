@@ -259,5 +259,6 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
       - The EC2 instance in **Private Subnet 1b** uses the **AppRole Auth Method**.
 
   3. Additionally, both EC2 instances are in private subnets, and their communication to Vault might require a **Jump EC2** (located in public subnet 1a) to access the Vault securely if Vault is hosted outside the VPC or in a private location. 
+  
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) and for the complete Terraform implementation.
 --- 
