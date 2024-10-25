@@ -245,7 +245,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     # After logging in, we can verify our login by checking our current Vault token:
     vault token lookup
   ```
-  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and for the complete Terraform implementation.
+  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) for the complete Terraform implementation.
 ---
 ### Day 8: Secret Management using Vault Agent
   1. **AWS Auth Method (EC2 IAM Role)** – for an EC2 instance in private subnet 1a.
