@@ -190,7 +190,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 6](figures/day6.png)
 ---
 
-### Day 7 and 8: Secret Management using Vault Agent
+### Day 7: Secret Management using Vault Agent
 - Without Vault Agent:
     Application needs the role ID and secret ID to authenticate with Vault.
     Vault uses AppRole to verify those IDs and generate a token.
@@ -201,8 +201,8 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   Vault Agent delivers the role ID and secret ID to Vault and retrieves the token.
   Vault Agent fetches the AWS credentials (using the token) from the AWS Secret Engine and caches them locally for the application to use.
   The application directly accesses the locally cached AWS credentials from the Vault Agent, avoiding the need to handle any Vault authentication details itself.
-![Day 7](figures/day7-8-withoutagent.png)
-![Day 8](figures/day7-8-withagent.png)
+![Day 7-1](figures/day7-withoutagent.png)
+![Day 7-2](figures/day7-withagent.png)
   ```bash
     # Enable AppRole Authentication
     vault auth enable approle
@@ -245,5 +245,13 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
     # After logging in, we can verify our login by checking our current Vault token:
     vault token lookup
   ```
-  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+  To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) and for the complete Terraform implementation.
 ---
+### Day 8: Secret Management using Vault Agent
+- AWS Auth (EC2 IAM Role):
+- - The "APP with AWS Auth EC2" in the private subnet 1a communicates with Vault using the AWS Auth method. In this method, Vault authenticates EC2 instances by verifying the    IAM role associated with the instance. This is done by sending a signed AWS request from the EC2 instance to Vault, which in turn validates the identity based on the EC2's metadata and IAM role. Once authenticated, Vault can issue dynamic secrets (such as AWS credentials) or provide access to other services securely.
+- AppRole Auth:
+- - The "APP with AppRole Auth EC2" in the private subnet 1b communicates with Vault using the AppRole authentication method. This method is more application-centric, where the EC2 instance assumes a specific role within Vault. The application running on this EC2 instance provides its role ID and secret ID to Vault, and in return, Vault grants it access to the necessary secrets and resources.
+![Day 8](figures/day8.png)
+To automate the setup of the Approle auth method in Vault, please refer to the [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+--- 
