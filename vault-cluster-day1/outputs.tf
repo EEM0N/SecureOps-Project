@@ -27,3 +27,8 @@ output "vault_private_endpoint_url" {
   description = "HCP Vault Cluster's Vault Private Endpoint URL"
   value = hcp_vault_cluster.vault_cluster.vault_private_endpoint_url
 }
+
+output "hvn_cidr" {
+  description = "HCP Vault Cluster's CIDR"
+  value = hcp_hvn.vault_hvn.cidr_block
+}
