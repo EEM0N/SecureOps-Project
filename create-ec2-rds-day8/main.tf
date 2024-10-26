@@ -180,7 +180,7 @@ resource "aws_db_instance" "project_rds" {
   identifier = "db-instance"
   instance_class       = "db.t3.micro"
   username             = "admin"
-  password             = "admin"
+  password             = "admin12345"
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.allow_db.id]
 }
