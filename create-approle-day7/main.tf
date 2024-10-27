@@ -9,6 +9,9 @@ resource "vault_policy" "aws_approle" {
 path "aws-dev/*" {
   capabilities = ["read"]
 }
+path "db/*" {
+  capabilities = ["read"]
+}
 EOT
 }
 
