@@ -69,11 +69,13 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 - **Outcome**: Cloud infrastructure setup is complete, managed through Terraform VCS workflow.
 ![Day 3](figures/day3-and-day4.png)
 - Workflow of enabling the AWS secrets engine in Vault 
-![Day 3-2](figures/day3-1.png)
+![Day 3-1](figures/day3-1.png)
 
   - When using dynamic AWS credentials in Terraform to configure resources, the credentials are generated for each plan and apply step. However, since these credentials have a short time-to-live (TTL), they may expire after the plan phase is complete, leading to errors during the apply phase if the credentials are no longer valid. 
 ![Day 3 Error](figures/error-day3.PNG)
   - We need to set certain environment variables in our HCP Terraform workspace to authenticate HCP Terraform with AWS using Vault-backed dynamic credentials. https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials/vault-backed/aws-configuration
+
+![Day 3-2](figures/day3-2.png)
 ---
 
 ### Day 5: Setup VPC Peering with Terraform
