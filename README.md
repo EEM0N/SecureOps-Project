@@ -57,6 +57,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   - Integrate Vault secret engine with the JWT auth method.
 - **Outcome**: Vault secret engine and JWT auth method are configured for secure access.
 ![Day 2](figures/day2.png)
+![Day 2-2](figures/day2-2.png)
 ---
 
 ### Day 3 & 4: Cloud Infrastructure Setup with Terraform
