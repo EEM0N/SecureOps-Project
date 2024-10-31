@@ -193,7 +193,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   ```bash
   vault login -method=aws role=<role-name>
   ```
-#![Day 6-1](figures/day6.png)
+<!--![Day 6-1](figures/day6.png)-->
 - Workflow of enabling the AWS Auth in Vault 
 ![Day 6-2](figures/day6-2.png)
 ---
