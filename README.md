@@ -255,7 +255,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
   ```
   To automate the setup of the Approle auth method in Vault, please refer to the [day7](https://github.com/EEM0N/SecureOps-Project/tree/main/create-approle-day7) for the complete Terraform implementation.
 ---
-### Day 8: Secret Management using Vault Agent
+### Day 8: Create EC2 Instances 
   1. **AWS Auth Method (EC2 IAM Role)** – for an EC2 instance in private subnet 1a.
   2. **AppRole Auth Method** – for an EC2 instance in private subnet 1b.
   ![Day 8 Architecture](figures/day8.png)
@@ -269,5 +269,11 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 3. Additionally, both EC2 instances are in private subnets, and their communication to Vault might require a **Jump EC2** (located in **public subnet 1a**) to access the Vault securely.
 
 Please refer to the [day8](https://github.com/EEM0N/SecureOps-Project/tree/main/create-ec2-rds-day8) for the complete Terraform implementation.
+
+--- 
+### Day 9-10: Access DB using Approle and AWS Auth 
+
+![Day 10](figures/day-9-10.png)
+Please refer to the [day10](https://github.com/EEM0N/SecureOps-Project/tree/main/create-db-secret-engine-day10) for the complete Terraform implementation.
 
 --- 
