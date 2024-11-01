@@ -198,7 +198,7 @@ This project leverages **Terraform Cloud's VCS-driven workflows** for automated 
 ![Day 6-2](figures/day6-2.png)
 ---
 
-### Day 7: Secret Management using Vault Agent
+### Day 7: Secret Management using AppRole
 - Without Vault Agent:
     Application needs the role ID and secret ID to authenticate with Vault.
     Vault uses AppRole to verify those IDs and generate a token.
