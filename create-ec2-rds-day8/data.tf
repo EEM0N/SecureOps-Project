@@ -10,6 +10,15 @@ data "aws_ami" "ubuntu" {
   }
   owners = ["099720109477"] # Canonical
 }
+data "terraform_remote_state" "vault_cluster" {
+  backend = "remote"
+  config = {
+    organization = "hellocloud-eem"
+    workspaces = {
+      name = "vault-cluster-day1"
+    }
+  }
+}
 
 data "terraform_remote_state" "vpc" {
   backend = "remote"
@@ -30,17 +39,6 @@ data "terraform_remote_state" "iam" {
     }
   }
 }
-
-data "terraform_remote_state" "vault_cluster" {
-  backend = "remote"
-  config = {
-    organization = "hellocloud-eem"
-    workspaces = {
-      name = "vault-cluster-day1"
-    }
-  }
-}
-
 
 data "terraform_remote_state" "approle" {
   backend = "remote"
